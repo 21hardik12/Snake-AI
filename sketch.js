@@ -10,7 +10,7 @@ function setup() {
 		[0, 0, width, tileSize],//upper
 		[0, height-tileSize, width, tileSize]//bottom
 	];
-	snake = new Snake(int(random(10, 20), int(random(10, 20)), tileSize));
+	snake = new Snake(int(random(10, 20)), int(random(10, 20)), tileSize);
 }
 
 function draw() {
