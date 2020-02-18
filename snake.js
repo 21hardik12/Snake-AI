@@ -7,17 +7,26 @@ class Snake {
 		this.xspeed = 1;
 		this.yspeed = 1;
 		this.total = 1;
-		this.tail = []
+		this.tail = [];
+		this.score = 0;
 	}	
 	
 	eatFood(food) {
 		let dis = dist(this.x, this.y, food.x, food.y);
 		if (dis < this.tileSize) {
 			this.total++;
+			this.score++;
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	display_score() {
+		textSize(18);
+		fill(255);
+		text("Score : ", 10, 18);
+		text(this.score, 70, 18); 
 	}
 	
 	draw() {
@@ -36,13 +45,10 @@ class Snake {
 		for (let i = 0; i < this.tail.length; i++) {			
 			d = dist(this.x, this.y, this.tail[i].x, this.tail[i].y);
 			if (d < this.tileSize) {
-				this.tail = [];
-				this.total = 1;
 				return true;
-			} else {
-				return false;
 			}
-		}		
+		}	
+		return false;
 	}
 	
 	update() {

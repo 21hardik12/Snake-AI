@@ -57,6 +57,7 @@ function draw() {
 	rect(food.x, food.y, tileSize, tileSize);
 	
 	snake.update();
+	snake.display_score();
 	snake.draw();
 	if (snake.eatFood(food)) {
 		gen_food();
