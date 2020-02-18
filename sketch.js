@@ -11,8 +11,12 @@ function setup() {
 		[0, 0, width, tileSize],//upper
 		[0, height-tileSize, width, tileSize]//bottom
 	];
-	snake = new Snake(int(random(10, 20)) * tileSize, int(random(10, 20)) * tileSize, tileSize);
 	frameRate(15);
+	reset();
+}
+
+function reset() {
+	snake = new Snake(int(random(10, 20)) * tileSize, int(random(10, 20)) * tileSize, tileSize);
 	gen_food();
 }
 
@@ -56,5 +60,8 @@ function draw() {
 	snake.draw();
 	if (snake.eatFood(food)) {
 		gen_food();
+	}
+	if (snake.death()) {
+		reset();
 	}
 }

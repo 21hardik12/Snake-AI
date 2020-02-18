@@ -7,6 +7,7 @@ class Snake {
 		this.xspeed = 1;
 		this.yspeed = 1;
 		this.total = 1;
+		this.tail = []
 	}	
 	
 	eatFood(food) {
@@ -21,14 +22,36 @@ class Snake {
 	
 	draw() {
 		fill(255);
-		rect(this.x, this.y, this.tileSize, this.tileSize);		
+		for (let i = 0; i < this.tail.length; i++) {
+			rect(this.tail[i].x, this.tail[i].y, this.tileSize, this.tileSize);
+		}	
 	}
 	
 	set_dir(dir) {
 		this.dir = dir;
 	}
 	
+	death() {
+		let d;
+		for (let i = 0; i < this.tail.length; i++) {			
+			d = dist(this.x, this.y, this.tail[i].x, this.tail[i].y);
+			if (d < this.tileSize) {
+				this.tail = [];
+				this.total = 1;
+				return true;
+			} else {
+				return false;
+			}
+		}		
+	}
+	
 	update() {
+		for (let i = 0; i < this.tail.length-1; i++) {
+			this.tail[i] = this.tail[i+1];			
+		}
+		if (this.total >= 1) {
+			this.tail[this.total-1] = createVector(this.x, this.y);
+		}
 		this.x += this.xspeed * this.dir[0] * this.tileSize;
 		this.y += this.yspeed * this.dir[1] * this.tileSize;
 		this.x = constrain(this.x, this.tileSize, width-this.tileSize-this.tileSize);
